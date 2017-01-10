@@ -41,26 +41,13 @@ Set Set::difference(const Set& set) const
 Set Set::difference(Set&& set) const
 {
 	if (m_size == 0) return set;
-
-	auto temp = new int[set.size()];
-	
 	size_t newSize = 0;
-	for (size_t i = 0; i < set.size(); i++)
-	{
-		if (!contains(set[i]))
-		{
-			temp[newSize++] = set[i];
+	for (size_t i = 0; i < set.size(); i++) {
+		if (!contains(set[i])) {
+			set.begin()[newSize++] = set[i];
 		}
 	}
-
-	for (size_t i = 0; i < newSize; i++)
-	{
-		set.begin()[i] = temp[i];
-	}
-
 	set.m_size = newSize;
-	delete[] temp;
-	cout << "move" << endl;
 	return set;
 }
 
@@ -95,7 +82,7 @@ Set Set::intersection(const Set& set) const
 	return result;
 }
 
-// Schnittmenge
+// Schnittmenge -> 
 Set Set::intersection(Set&& set) const
 {
 	if (m_size == 0 || set.m_size == 0)
@@ -105,23 +92,16 @@ Set Set::intersection(Set&& set) const
 	}
 
 	size_t newSize = 0;
-	auto temp = new int[set.size()];
 	for (size_t i = 0; i < set.size(); i++)
 	{
 		int value = set.begin()[i];
 		if (contains(value) && set.contains(value))
 		{
-			temp[newSize++] = value;
+			set.begin()[newSize++] = value;
 		}
 	}
 
-	for (size_t i = 0; i < newSize; i++)
-	{
-		set.begin()[i] = temp[i];
-	}
-
 	set.m_size = newSize;
-	delete[] temp;
 	return set;
 }
 

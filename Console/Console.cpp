@@ -34,47 +34,9 @@ template<> struct Zweihoch<0>
 
 int main()
 {
+	OrderedSet sEmpty1 = OrderedSet();
+	OrderedSet sEmpty2 = OrderedSet();
 
-	/*
-
-	const int set1[] = { 4,5,3,8,2,4,1,9,3 };
-	const int set1_len = sizeof(set1) / sizeof(int);
-	const int larger[] = { 5,8,9 };
-	const int larger_len = sizeof(larger) / sizeof(int);
-
-	OrderedSet s1(set1, set1_len); // 1,2,3,4,5,8,9 // len = 7
-	OrderedSet sLg(larger, larger_len); // 5,8,9
-
-	OrderedSet temp = s1.getLarger(4);
-
-	cout << "LARGER: " << temp << endl;
-
-	cout << boolalpha << (temp == sLg) << endl;
-
-	*/
-
-	// test move intersection
-	const int set1[] = { 1,2,3 };
-	Set s1(set1, sizeof(set1) / sizeof(int));
-	const int set2[] = { 3,2,4 };
-	Set s2(set2, sizeof(set2) / sizeof(int));
-	const int set3[] = { 2,3 };
-	Set s3(set3, sizeof(set3) / sizeof(int));
-
-	cout << boolalpha << (Set::intersection(s1, std::move(s2)) == s3) << endl;
-	cout << s2 << endl;
-	cout << s3 << endl;
-	cout << boolalpha << (s2 == s3) << endl;
-	cout << boolalpha << (s2.size() == s3.size()) << endl;
-
-	// test move difference
-	// s1 und s3 sollten nicht veraendert worden sein, lediglich s2
-	const int set4[] = { 1 };
-	Set s4(set4, sizeof(set4) / sizeof(int));
-	
-	cout << boolalpha << (Set::difference(std::move(s1), std::move(s3)) == s4) << endl;
-	cout << boolalpha << (s1 == s4) << endl;
-	cout << boolalpha << (s1.size() == s4.size()) << endl;
-
+	cout << boolalpha << (sEmpty1.getSmaller(10) == sEmpty2) << endl;
 }
 

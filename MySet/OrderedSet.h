@@ -37,6 +37,7 @@ public:
 	}
 
 	int *begin() const override;
+	
 	OrderedSet getSmaller(const int x);
 	OrderedSet getLarger(const int x);
 
@@ -51,5 +52,8 @@ public:
 		os << "}";
 		return os;
 	}
+
+	// Vereinigungsmenge
+	static Set merge(const OrderedSet& set1, const OrderedSet& set2) { return set1.merge(set2); }
 
 };

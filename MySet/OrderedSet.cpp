@@ -7,6 +7,12 @@ int * OrderedSet::begin() const
 
 OrderedSet OrderedSet::getSmaller(const int x)
 {
+	if (m_size == 0) {
+		m_size = 0;
+		m_start = 0;
+		return *this;
+	}
+
 	size_t newSize = 0;
 	while (begin()[newSize] < x) newSize++;
 	m_size = newSize;
@@ -15,6 +21,12 @@ OrderedSet OrderedSet::getSmaller(const int x)
 
 OrderedSet OrderedSet::getLarger(const int x)
 {
+	if (m_size == 0) {
+		m_size = 0;
+		m_start = 0;
+		return *this;
+	}
+
 	size_t newStart = 0;
 
 	while (begin()[newStart] <= x)
@@ -34,20 +46,20 @@ Set OrderedSet::merge(const Set &set) const
 	const OrderedSet* oSet = dynamic_cast<const OrderedSet*>(&set);
 	if (!oSet) return Set::merge(set);
 
-	auto temp = new int[m_size + oSet->size()];
+	OrderedSet result(m_size + oSet->size());
 
 	size_t oSetSize = oSet->size();
 
 	size_t count = 0;
 	size_t newSize = 0;
+
 	while (count < m_size || count < oSet->size())
 	{
-		if (count < m_size) temp[newSize++] = begin()[count];
-		if (count < oSetSize) temp[newSize++] = oSet->begin()[count];
+		if (count < m_size) result.begin()[newSize++] = begin()[count];
+		if (count < oSetSize && !contains(oSet->begin()[count])) result.begin()[newSize++] = oSet->begin()[count];
 		count++;
 	}
 
-	OrderedSet result(temp, newSize);
-	delete[] temp;
+	result.m_size = newSize;
 	return result;
 }

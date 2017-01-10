@@ -59,8 +59,11 @@ namespace UnitTest
 
 			OrderedSet s1(set1, set1_len); // 1,2,3,4,5,8,9 // len = 7
 			OrderedSet sSm(smaller, smaller_len); // 1,2,3
-
 			Assert::IsTrue(s1.getSmaller(4) == sSm);
+
+			OrderedSet sEmpty1 = OrderedSet();
+			OrderedSet sEmpty2 = OrderedSet();
+			Assert::IsTrue(sEmpty1.getSmaller(10) == sEmpty2);
 		}
 
 		TEST_METHOD(GetLarger)
@@ -72,12 +75,11 @@ namespace UnitTest
 
 			OrderedSet s1(set1, set1_len); // 1,2,3,4,5,8,9 // len = 7
 			OrderedSet sLg(larger, larger_len); // 5,8,9
+			Assert::IsTrue(s1.getLarger(4) == sLg);
 
-			OrderedSet temp = s1.getLarger(4);
-
-			cout << "LARGER: " << temp;
-
-			Assert::IsTrue(temp == sLg);
+			OrderedSet sEmpty1 = OrderedSet();
+			OrderedSet sEmpty2 = OrderedSet();
+			Assert::IsTrue(sEmpty1.getLarger(10) == sEmpty2);
 		}
 
 		TEST_METHOD(Empty)
@@ -114,17 +116,16 @@ namespace UnitTest
 
 		TEST_METHOD(MergeOrdered)
 		{
-			const int set1[] = { 1,2,3 };
+			const int set1[] = { 1,2,3,8,5,2,4,7,8 };
 			OrderedSet s1(set1, sizeof(set1) / sizeof(int));
 			const int set2[] = { 3,2,4 };
 			OrderedSet s2(set2, sizeof(set2) / sizeof(int));
-			const int set3[] = { 1,2,3,4 };
+			const int set3[] = { 1,2,3,4,5,7,8 };
 			OrderedSet s3(set3, sizeof(set3) / sizeof(int));
 
-			Assert::IsTrue(s1.merge(s2) == s3);
-			
-			Assert::IsTrue(s1.merge(Set()) == s1);
-			Assert::IsTrue(OrderedSet().merge(s1) == s1);
+			Assert::IsTrue(OrderedSet::merge(s1, s2) == s3);
+			Assert::IsTrue(OrderedSet::merge(s1, OrderedSet()) == s1);
+			Assert::IsTrue(OrderedSet::merge(OrderedSet(), s1) == s1);
 		}
 
 		// Differenzmenge A ohne B
