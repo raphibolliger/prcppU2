@@ -12,15 +12,17 @@ int main()
 	const int allL[] = { 10,11,12,13 };
 	const int allL_len = sizeof(allL) / sizeof(int);
 
-	OrderedSet sAllL(allL, allL_len);
-
-	OrderedSet sOrg = sAllL;
+	OrderedSet sOrg(allL, allL_len);
+	OrderedSet s1O(allL, allL_len);
+	OrderedSet s2O(allL, allL_len);
+	OrderedSet s3O(allL, allL_len);
+	OrderedSet s4O(allL, allL_len);
 	
-	OrderedSet s1 = sAllL.getSmaller(4);
-	OrderedSet s2 = sAllL.getSmaller(12);
+	OrderedSet s1 = s1O.getSmaller(4);
+	OrderedSet s2 = s2O.getSmaller(12);
 
-	OrderedSet s3 = sAllL.getLarger(20);
-	OrderedSet s4 = sAllL.getLarger(11);
+	OrderedSet s3 = s3O.getLarger(20);
+	OrderedSet s4 = s4O.getLarger(11);
 
 	cout << sOrg << endl;
 
