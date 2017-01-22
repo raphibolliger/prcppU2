@@ -14,7 +14,7 @@ OrderedSet OrderedSet::getSmaller(const int x)
 	}
 
 	size_t newSize = 0;
-	while (begin()[newSize] < x) newSize++;
+	while (begin()[newSize] < x && newSize <= m_size) newSize++;
 	m_size = newSize;
 	return *this;
 }
@@ -28,10 +28,11 @@ OrderedSet OrderedSet::getLarger(const int x)
 	}
 
 	size_t newStart = 0;
+	size_t count = 0;
 
-	while (begin()[newStart] <= x)
+	while (begin()[newStart] <= x && count < m_size)
 	{
-		int test = begin()[newStart];
+		count++;
 		newStart++;
 	}
 	

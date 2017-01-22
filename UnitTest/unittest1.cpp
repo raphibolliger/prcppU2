@@ -52,34 +52,36 @@ namespace UnitTest
 
 		TEST_METHOD(GetSmaller)
 		{
-			const int set1[] = { 4,5,3,8,2,4,1,9,3 };
+			const int set1[] = { 4,5,3,8,2,4,9,3 };
 			const int set1_len = sizeof(set1) / sizeof(int);
-			const int smaller[] = { 1,2,3 };
+			
+			const int smaller[] = { 2,3 };
 			const int smaller_len = sizeof(smaller) / sizeof(int);
 
-			OrderedSet s1(set1, set1_len); // 1,2,3,4,5,8,9 // len = 7
-			OrderedSet sSm(smaller, smaller_len); // 1,2,3
-			Assert::IsTrue(s1.getSmaller(4) == sSm);
+			OrderedSet s1(set1, set1_len); // 2,3,4,5,8,9 // len = 6
+			OrderedSet sSm(smaller, smaller_len); // 2,3
+			OrderedSet sEmpty = OrderedSet();
 
-			OrderedSet sEmpty1 = OrderedSet();
-			OrderedSet sEmpty2 = OrderedSet();
-			Assert::IsTrue(sEmpty1.getSmaller(10) == sEmpty2);
+			Assert::IsTrue(s1.getSmaller(4) == sSm);
+			Assert::IsTrue(sEmpty.getSmaller(10) == sEmpty);
+			Assert::IsTrue(s1.getSmaller(2) == sEmpty);
 		}
 
 		TEST_METHOD(GetLarger)
 		{
 			const int set1[] = { 4,5,3,8,2,4,1,9,3 };
 			const int set1_len = sizeof(set1) / sizeof(int);
+
 			const int larger[] = { 5,8,9 };
 			const int larger_len = sizeof(larger) / sizeof(int);
 
 			OrderedSet s1(set1, set1_len); // 1,2,3,4,5,8,9 // len = 7
 			OrderedSet sLg(larger, larger_len); // 5,8,9
-			Assert::IsTrue(s1.getLarger(4) == sLg);
+			OrderedSet sEmpty = OrderedSet();
 
-			OrderedSet sEmpty1 = OrderedSet();
-			OrderedSet sEmpty2 = OrderedSet();
-			Assert::IsTrue(sEmpty1.getLarger(10) == sEmpty2);
+			Assert::IsTrue(s1.getLarger(4) == sLg);
+			Assert::IsTrue(sEmpty.getLarger(10) == sEmpty);
+			Assert::IsTrue(s1.getLarger(20) == sEmpty);
 		}
 
 		TEST_METHOD(Empty)

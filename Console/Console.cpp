@@ -5,38 +5,30 @@
 #include "../MySet/MySet.h"
 #include "../MySet/OrderedSet.h"
 
-template<class T, int S> class Array {
-	T m_array[S];
-public:
-	Array() { memset(m_array, 0, S * sizeof(T)); }
-	const T& operator[ ](int pos) const { return m_array[pos]; }
-	T& operator[ ](int pos) { return m_array[pos]; }
-	void print() const {
-		int l = 0; cout << '[';
-		if (S > 0) cout << m_array[l++];
-		while (l < S) cout << ',' << m_array[l++];
-		cout << ']' << endl;
-	}
-};
-
-
-// Rekursive template definition
-template<int n> struct Zweihoch
-{
-	const static int Wert = 2 * Zweihoch<n - 1>::Wert;
-};
-
-// Verankerung der Rekursion
-template<> struct Zweihoch<0>
-{
-	const static int Wert = 1;
-};
-
 int main()
 {
 	OrderedSet sEmpty1 = OrderedSet();
-	OrderedSet sEmpty2 = OrderedSet();
 
-	cout << boolalpha << (sEmpty1.getSmaller(10) == sEmpty2) << endl;
+	const int allL[] = { 10,11,12,13 };
+	const int allL_len = sizeof(allL) / sizeof(int);
+
+	OrderedSet sAllL(allL, allL_len);
+
+	OrderedSet sOrg = sAllL;
+	
+	OrderedSet s1 = sAllL.getSmaller(4);
+	OrderedSet s2 = sAllL.getSmaller(12);
+
+	OrderedSet s3 = sAllL.getLarger(20);
+	OrderedSet s4 = sAllL.getLarger(11);
+
+	cout << sOrg << endl;
+
+	cout << s1 << endl;
+	cout << s2  << endl;
+	
+	cout << s3 << endl;
+	cout << s4 << endl;
+
 }
 
