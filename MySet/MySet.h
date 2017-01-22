@@ -17,6 +17,11 @@ protected:
 		cout << "private-ctor" << endl;
 	}
 
+	Set(const shared_ptr<int>& array, size_t size) : m_values(array), m_size(size)
+	{
+		
+	}
+
 	virtual int *begin() const;
 
 	int& operator[](size_t i) const;

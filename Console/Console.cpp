@@ -13,24 +13,25 @@ int main()
 	const int allL_len = sizeof(allL) / sizeof(int);
 
 	OrderedSet sOrg(allL, allL_len);
+	
 	OrderedSet s1O(allL, allL_len);
 	OrderedSet s2O(allL, allL_len);
 	OrderedSet s3O(allL, allL_len);
 	OrderedSet s4O(allL, allL_len);
 	
 	OrderedSet s1 = s1O.getSmaller(4);
-	OrderedSet s2 = s2O.getSmaller(12);
+	OrderedSet s2 = s1O.getSmaller(12);
 
-	OrderedSet s3 = s3O.getLarger(20);
-	OrderedSet s4 = s4O.getLarger(11);
+	OrderedSet s3 = s1O.getLarger(20);
+	OrderedSet s4 = s1O.getLarger(11);
 
-	cout << sOrg << endl;
+	cout << endl << sOrg << endl << endl;
 
-	cout << s1 << endl;
-	cout << s2  << endl;
+	cout << "1: " << s1 << endl;
+	cout << "2: " << s2 << endl << endl;
 	
-	cout << s3 << endl;
-	cout << s4 << endl;
+	cout << "3: " << s3 << endl;
+	cout << "4: " << s4 << endl << endl;
 
 }
 

@@ -10,17 +10,15 @@ OrderedSet OrderedSet::getSmaller(const int x)
 	if (m_size == 0) {
 		m_size = 0;
 		m_start = 0;
-		return *this;
+		return OrderedSet();
 	}
+
 
 	size_t newSize = 0;
-	for (size_t i = m_start; i < m_size; ++i)
-	{
-		if (begin()[i] < x) newSize++;
-	}
+	while (newSize <= m_size && begin()[newSize] < x) newSize++;
 	m_size = newSize;
 
-	return *this;
+	return OrderedSet(m_values, newSize, 0);
 }
 
 OrderedSet OrderedSet::getLarger(const int x)
@@ -28,23 +26,19 @@ OrderedSet OrderedSet::getLarger(const int x)
 	if (m_size == 0) {
 		m_size = 0;
 		m_start = 0;
-		return *this;
+		return OrderedSet();
 	}
 
-	size_t newSize = 0;
-	size_t newStart = -1;
-	for (size_t i = m_start; i < m_size; ++i)
+	size_t newStart = 0;
+	size_t count = 0;
+
+	while (count < m_size && begin()[newStart] <= x)
 	{
-		if (begin()[i] > x)
-		{
-			newSize++;
-			if (newStart == -1) newStart = i;
-		}
+		count++;
+		newStart++;
 	}
-	m_size = newSize;
-	m_start = newStart;
 
-	return *this;
+	return OrderedSet(m_values, m_size - newStart, newStart);
 }
 
 Set OrderedSet::merge(const Set &set) const

@@ -9,11 +9,16 @@ using namespace std;
 
 class OrderedSet: public Set
 {
+
 protected:
 
 	size_t m_start;
 
 	OrderedSet(size_t size) : Set(size), m_start(0)
+	{
+	}
+
+	OrderedSet(const shared_ptr<int>& array, size_t size, size_t start) : Set(array, size), m_start(start)
 	{
 	}
 
